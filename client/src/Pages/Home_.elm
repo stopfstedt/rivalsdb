@@ -7,6 +7,7 @@ import Page
 import Request
 import Shared
 import UI.Layout.Template
+import UI.MultiSelect
 import View exposing (View)
 
 
@@ -21,16 +22,26 @@ page shared req =
 
 
 type alias Model =
-    {}
+    { multi : UI.MultiSelect.Model Int }
 
 
 init : Request.With Params -> ( Model, Effect Msg )
 init _ =
-    ( {}, Effect.none )
+    ( { multi =
+            UI.MultiSelect.init
+                [ ( 1, "One" )
+                , ( 2, "Two" )
+                , ( 3, "Three" )
+                , ( 4, "Four" )
+                ]
+      }
+    , Effect.none
+    )
 
 
 type Msg
     = FromShared Shared.Msg
+    | FromMulti (UI.MultiSelect.Msg Int)
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
@@ -39,7 +50,14 @@ update msg model =
         FromShared subMsg ->
             ( model, Effect.fromShared subMsg )
 
+        FromMulti subMsg ->
+            ( { model | multi = UI.MultiSelect.update subMsg model.multi }, Effect.none )
+
 
 view : Shared.Model -> Model -> View Msg
-view shared _ =
-    UI.Layout.Template.view FromShared shared []
+view shared model =
+    UI.Layout.Template.view FromShared
+        shared
+        [ h1 [] [ text "oioioi" ]
+        , UI.MultiSelect.view FromMulti model.multi
+        ]
