@@ -5,13 +5,15 @@ import Json.Decode exposing (Decoder)
 
 
 type Clan
-    = Brujah
+    = BanuHaqim
+    | Brujah
     | Gangrel
     | Hecata
     | Lasombra
     | Malkavian
     | Nosferatu
     | Ravnos
+    | Salubri
     | ThinBlood
     | Toreador
     | Tremere
@@ -22,13 +24,15 @@ type Clan
 enum : Enum Clan
 enum =
     Enum.create
-        [ ( "brujah", Brujah )
+        [ ( "banu haqim", BanuHaqim )
+        , ( "brujah", Brujah )
         , ( "gangrel", Gangrel )
         , ( "hecata", Hecata )
         , ( "lasombra", Lasombra )
         , ( "malkavian", Malkavian )
         , ( "nosferatu", Nosferatu )
         , ( "ravnos", Ravnos )
+        , ( "salubri", Salubri )
         , ( "thin-blood", ThinBlood )
         , ( "toreador", Toreador )
         , ( "tremere", Tremere )
@@ -65,6 +69,8 @@ comparable =
 name : Clan -> String
 name c =
     case c of
+        BanuHaqim ->
+            "Banu Haquim"
         Brujah ->
             "Brujah"
 
@@ -85,6 +91,9 @@ name c =
 
         Ravnos ->
             "Ravnos"
+
+        Salubri ->
+            "Salubri"
 
         ThinBlood ->
             "Thin-blood"
