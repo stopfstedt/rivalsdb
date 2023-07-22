@@ -18,8 +18,9 @@ declare module "@fastify/jwt" {
 
 const authenticatedPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.register(auth0Verify, {
-    domain: "rivalsdb.eu.auth0.com",
-    audience: "https://www.rivalsdb.app/api",
+    domain: "dev-0fnyuab6.us.auth0.com",
+    audience: "https://rivalsdb-production-f41b.up.railway.app/api",
+    
   });
 
   fastify.addHook("preHandler", async (req) => {
