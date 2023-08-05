@@ -1,6 +1,7 @@
 import { FastifyPluginAsync } from "fastify";
 import auth0Verify from "fastify-auth0-verify";
 import fastifyPlugin from "fastify-plugin";
+import { auth0Audience, auth0Domain } from "../env.js";
 
 declare module "@fastify/jwt" {
   interface FastifyJWT {
@@ -18,8 +19,8 @@ declare module "@fastify/jwt" {
 
 const authenticatedPlugin: FastifyPluginAsync = async (fastify) => {
   fastify.register(auth0Verify, {
-    domain: "rivalsdb.eu.auth0.com",
-    audience: "https://www.rivalsdb.app/api",
+    domain: auth0Domain,
+    audience: auth0Audience,
   });
 
   fastify.addHook("preHandler", async (req) => {

@@ -22,11 +22,11 @@ export class Auth {
     }, 60e3);
   }
 
-  public static async create(): Promise<{ auth: Auth; userData?: UserData }> {
+  public static async create(domain: string, client_id: string, audience: string): Promise<{ auth: Auth; userData?: UserData }> {
     const auth0 = await createAuth0Client({
-      domain: "rivalsdb.eu.auth0.com",
-      client_id: "jfoDbFRgDspBrj1h9NXY9RUgXIwfKHUQ",
-      audience: "https://www.rivalsdb.app/api",
+      domain,
+      client_id,
+      audience,
       cacheLocation: "localstorage",
     });
 

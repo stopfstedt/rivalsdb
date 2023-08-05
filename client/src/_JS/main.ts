@@ -1,6 +1,8 @@
 import { generateId } from "@rivalsdb/id";
 
 import "../styles.sass";
+import { auth0Audience, auth0Domain, auth0ClientId } from "../env";
+
 
 import { Elm } from "./app";
 import { Auth } from "./auth";
@@ -10,7 +12,7 @@ import { Tracker } from "./tracker";
 async function main() {
   const [cards, { auth, userData }] = await Promise.all([
     fetchCards(),
-    Auth.create(),
+    Auth.create(auth0Domain, auth0ClientId, auth0Audience),
   ]);
 
   const app = Elm.Main.init({ flags: { cards, userData } });

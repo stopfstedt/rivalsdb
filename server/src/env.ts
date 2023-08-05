@@ -40,3 +40,6 @@ if (typeof env.ENVIRONMENT !== "string") {
   throw Error("Missing environment variable ENVIRONMENT");
 }
 export const environment = env.ENVIRONMENT;
+
+export const auth0Domain = `${env.AUTH0_DOMAIN}`;
+export const auth0Audience = `${env.AUTH0_AUDIENCE}`;
